@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Subtitle Shifter - Home</title>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <form class="download">
+        <div class="form-group">
+            <label for="file">File: </label>
+            <input id="file" type="file">
+        </div>
+
+        <div class="form-group">
+            <label for="input">Time Shift: </label>
+            <input id="inputHour" type="number" placeholder="Hours">:
+            <input id="inputMinutes" type="number" min="0" max="59" placeholder="Minutes">:
+            <input id="inputSeconds" type="number" min="0" max="59" placeholder="Seconds">:
+            <input id="inputMilli" type="number" min="0" max="999" placeholder="Milli Seconds">
+        </div>
+
+        <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
