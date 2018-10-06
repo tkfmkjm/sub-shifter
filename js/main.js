@@ -22,6 +22,12 @@ hours*60*60*100 = minutes*60*100 = seconds*100 = milli seconds
 ...
 (h[4]*36000)+(m[4]*600)+(s[4]*100)+(ms[4])
 
+1..txt - > Array(h, m, s, ms)
+2. Array - > convert to ms
+3. Add number
+4. ms - > Array(h, m, s, ms)
+5. Array - > .txt
+
 */
 
 const downloadForm = document.querySelector('.download');
@@ -95,52 +101,58 @@ downloadForm.addEventListener('submit', function (event) {
 
         millisecTotal[i] = millisecArray[i] + secArray[i] + minArray[i] + hourArray[i] + inputTotal;
 
-        // console.log(secArray[i]);
-        // console.log(typeof secArray[i]);
-      }
+        // ??? Can I use [i]?
+        hourArray[i] = floor(millisecTotal[i] / 360000);
+        minArray[i] = floor(millisecTotal[i] % 360000 / 6000);
+        secArray[i] = ;
+        millisecArray[i] = ;
+      );
 
-      //checking number of object in the array
-      // console.log('Array Length: ' + a.length);
-
-      console.log(millisecTotal[3]);
-
-    } else {
-      console.log('It is not a srt file');
+      // console.log(secArray[i]);
+      // console.log(typeof secArray[i]);
     }
 
-    // save file
-    // delete current element
-    function destroyClickedElement(event) {
-      document.body.removeChild(event.target);
-    }
-    // var for text to put in file
-    let textToSave = string;
+    console.log(millisecTotal[3]);
 
-    // save file type as .txt
-    let textToSaveAsBlob = new Blob([textToSave], {
-      type: "text/plain"
-    });
-    let textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    // var for file name
-    let fileNameToSaveAs = 'file';
-    // create an <a> tag
-    let downloadLink = document.createElement("a");
-    // set download file name of <a>
-    downloadLink.download = fileNameToSaveAs;
-    // set text of <a>
-    downloadLink.innerHTML = "Download File";
-    // set url of <a>
-    downloadLink.href = textToSaveAsURL;
-    // delete <a> after click
-    downloadLink.onclick = destroyClickedElement;
-    // set display of <a> to none
-    downloadLink.style.display = "none";
-    // add <a> to end of body
-    document.body.appendChild(downloadLink);
-    // click <a> to download file
-    downloadLink.click();
-  };
-  // need this so the file reader knows when it is done reading the file
-  // pretty troll I know
-  fileReader.readAsText(fileToLoad, "UTF-8");
+    //convert new timestamps to hour/minute/second/milli second
+
+  } else {
+    console.log('It is not a srt file');
+  }
+
+  // save file
+  // delete current element
+  function destroyClickedElement(event) {
+    document.body.removeChild(event.target);
+  }
+  // var for text to put in file
+  let textToSave = string;
+
+  // save file type as .txt
+  let textToSaveAsBlob = new Blob([textToSave], {
+    type: "text/plain"
+  });
+  let textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+  // var for file name
+  let fileNameToSaveAs = 'file';
+  // create an <a> tag
+  let downloadLink = document.createElement("a");
+  // set download file name of <a>
+  downloadLink.download = fileNameToSaveAs;
+  // set text of <a>
+  downloadLink.innerHTML = "Download File";
+  // set url of <a>
+  downloadLink.href = textToSaveAsURL;
+  // delete <a> after click
+  downloadLink.onclick = destroyClickedElement;
+  // set display of <a> to none
+  downloadLink.style.display = "none";
+  // add <a> to end of body
+  document.body.appendChild(downloadLink);
+  // click <a> to download file
+  downloadLink.click();
+};
+// need this so the file reader knows when it is done reading the file
+// pretty troll I know
+fileReader.readAsText(fileToLoad, "UTF-8");
 });
